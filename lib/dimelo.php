@@ -90,7 +90,7 @@ class dimelo
     //get the user information by the iss
     $urlInfos = $this->hostname . '/1.0/users?access_token='. $this->access_token . '&username=' . $this->getIssuer(); 
     /*
-     * @ombou\todo : making a curl call to $urlInfos
+     * @ombou\todo : making a curl call to $urlInfos (using Guzzle)
      */
     // $return = $this->curlCall($urlInfos);
     $data = (array) json_decode($return, true);
@@ -103,7 +103,7 @@ class dimelo
       );
 
       /*
-       * @ombou\todo : making a curl call to $logoutUrl with $posted_data
+       * @ombou\todo : making a curl call to $logoutUrl with $posted_data (using Guzzle)
        */
       // $return = $this->curlCall($logoutUrl, $post_data);
       $data = (array) json_decode($return, true);
