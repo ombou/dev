@@ -12,8 +12,8 @@ class JWTHandler
   protected $salt;
 
   protected $hmacAlgMapping = array(
-  'HS512' => 'sha512',
-  'HS256' => 'sha256',
+    'HS512' => 'sha512',
+    'HS256' => 'sha256',
   );
 
   public function __construct($salt = null)
@@ -71,9 +71,9 @@ class JWTHandler
    */
   protected function getSignature($token, $alg = self::ALG)
   {
-  if (!isset($this->hmacAlgMapping[$alg])) {
-    return false;
-  }
+    if (!isset($this->hmacAlgMapping[$alg])) {
+      return false;
+    }
 
     $signature = hash_hmac($this->hmacAlgMapping[$alg], $token, $this->salt, true);
 
