@@ -6,6 +6,8 @@
  */
 class dimelo
 {
+  Const API_VERSION = '1.0';
+
   protected $iss = null;
 
   protected $hostname;
@@ -37,8 +39,7 @@ class dimelo
    */
   public function __construct(JWTHandler $jwt, $iss, $access_token, $redirectUrl, $serviceUrl)
   {
-    // fix server Epoch time bug
-    $iat = time() - 3600;
+    $iat = time();
 
     $this->iss = $iss;
     $this->access_token = $access_token;
@@ -88,7 +89,7 @@ class dimelo
     }
 
     //get the user information by the iss
-    $urlInfos = $this->hostname . '/1.0/users?access_token='. $this->access_token . '&username=' . $this->getIssuer(); 
+    $urlInfos = $this->hostname . '/' . self::API_VERSION . '/users?access_token='. $this->access_token . '&username=' . $this->getIssuer(); 
     /*
      * @ombou\todo : making a curl call to $urlInfos (using Guzzle)
      */
@@ -97,7 +98,7 @@ class dimelo
 
     //POST logout request 
     if (key($data) === 0 && isset($data[0]['id'])) {
-      $logoutUrl = $this->hostname . '/1.0/users/'. $data[0]['id'] . '/logout';
+      $logoutUrl = $this->hostname . '/' . self::API_VERSION . '/users/'. $data[0]['id'] . '/logout';
       $post_data = array(
         'access_token' => $this->access_token,
       );
